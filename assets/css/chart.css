@@ -1,0 +1,240 @@
+/* ===== PURE CSS CHARTS (NO LIBRARY) ===== */
+
+/* Common Chart Styles */
+.pure-line-chart,
+.pure-bar-chart,
+.pure-pie-chart,
+.pure-mixed-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+/* Chart Bars Container */
+.chart-bars {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 220px;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.chart-bar-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+/* Chart Bar */
+.chart-bar {
+    width: 100%;
+    background: linear-gradient(180deg, #ff6b00 0%, #ff8534 100%);
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
+}
+
+.chart-bar.vertical {
+    border-radius: 8px 8px 0 0;
+}
+
+.chart-bar:hover {
+    filter: brightness(1.1);
+    transform: translateY(-4px);
+}
+
+.chart-bar:hover .bar-value {
+    opacity: 1;
+}
+
+/* Bar Value Label */
+.bar-value {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.chart-bar:hover::after {
+    content: attr(data-value);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 0.5rem;
+}
+
+/* Chart Labels */
+.chart-label {
+    font-size: 0.75rem;
+    color: #666;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+/* ===== PIE CHART ===== */
+.pie-bars {
+    display: flex;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.pie-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pie-bar:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+.pie-label {
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    line-height: 1.4;
+    padding: 0.5rem;
+}
+
+/* ===== CHART LEGEND ===== */
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.legend-text {
+    color: #374151;
+}
+
+/* ===== MIXED CHART (Cashier Performance) ===== */
+.mixed-bars {
+    display: flex;
+    gap: 0.25rem;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.mixed-bars .chart-bar {
+    flex: 1;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .chart-bars {
+        height: 180px;
+        gap: 0.25rem;
+    }
+    
+    .bar-value {
+        font-size: 0.6rem;
+    }
+    
+    .chart-label {
+        font-size: 0.7rem;
+    }
+    
+    .pie-bars {
+        height: 140px;
+    }
+    
+    .pie-label {
+        font-size: 0.65rem;
+    }
+    
+    .chart-legend {
+        gap: 0.5rem;
+    }
+    
+    .legend-item {
+        font-size: 0.75rem;
+    }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chart-bar-wrapper {
+    animation: slideUp 0.5s ease forwards;
+}
+
+.chart-bar-wrapper:nth-child(1) { animation-delay: 0.1s; }
+.chart-bar-wrapper:nth-child(2) { animation-delay: 0.2s; }
+.chart-bar-wrapper:nth-child(3) { animation-delay: 0.3s; }
+.chart-bar-wrapper:nth-child(4) { animation-delay: 0.4s; }
+.chart-bar-wrapper:nth-child(5) { animation-delay: 0.5s; }
+.chart-bar-wrapper:nth-child(6) { animation-delay: 0.6s; }
+.chart-bar-wrapper:nth-child(7) { animation-delay: 0.7s; }
+
+/* ===== LOADING STATE ===== */
+.chart-card canvas {
+    display: none !important;
+}
+
+.chart-card > div[style*="position: relative"] {
+    position: relative !important;
+    height: 300px !important;
+    display: block !important;
+}
